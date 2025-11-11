@@ -145,10 +145,11 @@ input::placeholder{
 
 .item-card .item-icon{
     width: 120px;
+    transition: .2s ease-out;
     filter: invert(1) opacity(.3) drop-shadow(6px 6px 8px black);
 }
-.item-card:hover .item-card{
-    filter: opacity(.8);
+.item-card:hover .item-icon{
+    filter: invert(1) opacity(.7) drop-shadow(6px 6px 8px black);
 }
 /* .item-card .add-button{
     cursor: pointer;
