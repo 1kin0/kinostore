@@ -1,7 +1,8 @@
 <?php
-header("Access-Control-Allow-Origin: https://www.roblox.com");
+
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -9,16 +10,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-$responseData = [
+$response_data = [
     "status" => "success",
-    "message" => "Hello from k1no.fun!",
+    "message" => "API is working!",
     "timestamp" => time(),
-    "data" => [
-        "players_online" => 42,
-        "server_status" => "online",
-        "version" => "1.0.0"
+    "server_info" => [
+        "name" => "k1no.fun",
+        "players_online" => 156,
+        "status" => "online",
+        "version" => "2.1.0"
     ]
 ];
 
-echo json_encode($responseData);
+$json_response = json_encode($response_data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+if ($json_response === false) {
+    $error_response = [
+        "status" => "error",
+        "message" => "JSON encoding failed",
+        "json_error" => json_last_error_msg()
+    ];
+    $json_response = json_encode($error_response);
+}
+
+echo $json_response;
+
+exit();
 ?>
